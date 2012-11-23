@@ -19,6 +19,7 @@ class VimeoTest extends ServiceTestCase
         return array(
             array('http://vimeo.com/15247292', '15247292'),
             array('http://player.vimeo.com/video/15247292?title=0&amp;byline=0&amp;portrait=0&amp;color=bababa', '15247292'),
+            array('http://vimeo.com/moogaloop.swf?clip_id=13497165&server=vimeo.com&show_title=1&show_byline=1&show_portrait=0&color=&fullscreen=1', '13497165'),
         );
     }
 

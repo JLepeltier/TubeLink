@@ -21,12 +21,23 @@ class Vimeo implements ServiceInterface
     {
         $data  = parse_url($url);
         if (empty($data['host'])) {
-          return false;
+            return false;
         }
-        if (false !== strpos($data['host'], 'vimeo.com')
-            && preg_match('#^/(video/)?([0-9]+)?$#', $data['path'], $matches)
-        ) {
-            $id = $matches[2];
+        if (false !== strpos($data['host'], 'vimeo.com')) {
+            if (preg_match('#^/(video/)?([0-9]+)?$#', $data['path'], $matches)) {
+                $id = $matches[2];
+            } else {
+                $query = array();
+                if (isset($data['query'])) {
+                    parse_str($data['query'], $query);
+                }
+                if (!empty($query['clip_id']))
+                {
+                   $id = $query['clip_id'];
+                } else {
+                    return false;
+                }
+            }
         } else {
             return false;
         }
